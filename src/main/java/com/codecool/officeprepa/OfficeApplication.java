@@ -8,7 +8,7 @@ import java.util.Scanner;
 import static java.awt.SystemColor.menu;
 
 public class OfficeApplication {
-    public Office sunnyOfficetest;
+    private static Office sunnyOfficetest;
 
     public static void main ( String[] args ) {
 
@@ -41,7 +41,7 @@ public class OfficeApplication {
     }
 
     private static void createTestSunnyOffice () {
-        this.sunnyOfficetest = FactoryOffice.createOffice("Sunny Office");
+        sunnyOfficetest = FactoryOffice.createOffice("Sunny Office");
 
     }
 
@@ -49,7 +49,7 @@ public class OfficeApplication {
         System.out.println("Menu:");
         System.out.println("1. Create SunnyOffice for test");
         System.out.println("2. Print Salaries in month by Employee");
-        System.out.println("2. Print Salaries in year by Employee and month");
+        System.out.println("3. Print Salaries in year by Employee and month");
         System.out.println("q - quit program");
     }
 }

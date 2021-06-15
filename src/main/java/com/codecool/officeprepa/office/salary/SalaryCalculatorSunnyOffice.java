@@ -1,23 +1,66 @@
 package com.codecool.officeprepa.office.salary;
 
 import com.codecool.officeprepa.employee.Employee;
+import com.codecool.officeprepa.employee.Leader;
+import com.codecool.officeprepa.employee.OfficeWorker;
+import com.codecool.officeprepa.employee.SalesPerson;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class SalaryCalculatorSunnyOffice extends SalaryCalculator{
 
-    public SalaryCalculatorSunnyOffice ( List<EntrySalary> sCalculator, List<Employee> employees ) {
-        super(sCalculator, employees);
+
+    private static final BigDecimal BONUS_AMOUNT_FOR_TEAM_MEMBER = BigDecimal.valueOf(200);
+
+    public SalaryCalculatorSunnyOffice ( List<EntrySalary> sCalculator, List<Employee> employees, Map<String, Leader> groups ) {
+        super(sCalculator, employees, groups);
     }
 
     @Override
-    protected void calculateSalaryForEmployee ( LocalDate date, Employee e ) {
+    public List<EntrySalary> calculateSalaryForGivenMonth ( LocalDate date ) {
+        List<EntrySalary> calculatedSalaryEntries = new ArrayList<>();
+        BigDecimal calculatedSalary;
+        for (Employee e : employees) {
+            if (e instanceof OfficeWorker || e instanceof SalesPerson ){
+                calculatedSalary = e.getContractSalary();
+            } else if (e instanceof Leader) {
+                int salaryBonusFactorLeader = findNumberOfEmployeesAssignedToLeaderGroup((Leader)e);
 
+                calculatedSalary =
+                        BONUS_AMOUNT_FOR_TEAM_MEMBER.multiply(BigDecimal.valueOf(salaryBonusFactorLeader));
+                calculatedSalary.add(e.getContractSalary());
+
+            } else { calculatedSalary = BigDecimal.valueOf(0); }
+            calculatedSalaryEntries.add(new EntrySalary(
+                    date,
+                    e.getUniqueID(),
+                    e.getName(),
+                    calculatedSalary ));
+        }
+        return calculatedSalaryEntries;
     }
+
+    private int findNumberOfEmployeesAssignedToLeaderGroup (Leader l) {
+        int foundNumberOfEmployeesAssignedToLeaderinGroups = 0;
+        for (Map.Entry<String, Leader> entryGroup : groups.entrySet()){
+            if (entryGroup.getValue() == l) {
+                for (Employee e : employees){
+                    if (e.getGroupName().equals(entryGroup.getKey())){
+                        foundNumberOfEmployeesAssignedToLeaderinGroups++;
+                    }
+                }
+            }
+        }
+        return foundNumberOfEmployeesAssignedToLeaderinGroups;
+    }
+
+
 
     @Override
     public Optional<List<EntrySalary>> getMonthSalaryEntries ( LocalDate date, Employee e) {

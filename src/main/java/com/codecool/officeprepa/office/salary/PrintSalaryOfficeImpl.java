@@ -30,6 +30,23 @@ public class PrintSalaryOfficeImpl implements PrintSalaryOffice{
 
     @Override
     public String printYearSalaryByEmployees ( SalaryCalculator sC, LocalDate date ) {
-        return null;
+        StringBuilder sb = new StringBuilder();
+        Optional<List<EntrySalary>> maybeYearSalary = sC.getYearSalaryByEmployeesEntries(date);
+
+        sb.append("----------------------------\n");
+        sb.append("Year's salary by employee: \n");
+        sb.append("----------------------------\n");
+
+        if (maybeYearSalary.isPresent()){
+            for (EntrySalary entry : maybeYearSalary.get()){
+                sb.append(entry + "\n");
+            }
+        } else {
+            sb.append("<< no records found >>> \n");
+            sb.append("----------------------------\n");
+        }
+
+        return sb.toString();
+
     }
 }

@@ -10,7 +10,16 @@ public abstract class Employee {
 
     protected String groupName;
 
+
     protected BigDecimal contractSalary;
+
+    public Employee ( String name, String uniqueID,
+                      String groupName, BigDecimal contractSalary ) {
+        this.name = name;
+        this.uniqueID = uniqueID;
+        this.groupName = groupName;
+        this.contractSalary = contractSalary;
+    }
 
 
     public String createUniqueID(){
@@ -38,7 +47,7 @@ public abstract class Employee {
                 "name='" + name + '\'' +
                 ", uniqueID='" + uniqueID + '\'' +
                 ", groupName='" + groupName + '\'' +
-                ", salary=" + salary +
+                ", salary=" + contractSalary +
                 '}';
     }
 
@@ -54,7 +63,11 @@ public abstract class Employee {
         return groupName;
     }
 
+    public void setContractSalary ( BigDecimal contractSalary ) {
+        this.contractSalary = contractSalary;
+    }
+
     public BigDecimal getContractSalary () {
-        return contractSalary;
+        return this.contractSalary;
     }
 }
