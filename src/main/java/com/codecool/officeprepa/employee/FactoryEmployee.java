@@ -5,7 +5,7 @@ import java.util.UUID;
 
 public class FactoryEmployee {
 
-    public Employee getInstance( String typeOfEmployee, String name,
+    public static Employee getInstance( String typeOfEmployee, String name,
                                 String groupName,
                                 BigDecimal contractSalary ){
         return switch(typeOfEmployee.toLowerCase()){

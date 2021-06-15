@@ -6,6 +6,6 @@ import com.codecool.officeprepa.office.Office;
 import java.time.LocalDate;
 
 public interface PrintSalaryOffice {
-    String printYearSalaryOneEmployee(SalaryCalculator sC, LocalDate date, Employee e);
+    String  printYearSalaryOneEmployee(SalaryCalculator sC, LocalDate date, Employee e);
     String printYearSalaryByEmployees( SalaryCalculator sC, LocalDate date );
 }

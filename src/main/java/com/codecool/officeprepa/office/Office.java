@@ -25,12 +25,10 @@ public abstract class Office {
         this.officeName = officeName;
     }
     public List<Employee> getEmployees (){
-        return (List<Employee>) Collections.unmodifiableCollection(employees);
+        return this.employees;
     }
 
-    public boolean hireEmployee(Employee e){
-        return employees.add(e);
-    }
+    public abstract boolean hireEmployee(Employee e);
 
     public void addGroup(String group, Leader leader){
         groups.put(group, leader);

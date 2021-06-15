@@ -14,4 +14,14 @@ public class OfficeImplSunnyOffice extends Office{
                                    String officeName) {
         super(employees, salaryCalculator, groups, officeName);
     }
+
+    @Override
+    public boolean hireEmployee ( Employee e ) {
+        if (e instanceof Leader){
+            this.groups.put(e.getGroupName(), (Leader)e);
+        }
+        return employees.add(e);
+    }
+
+
 }

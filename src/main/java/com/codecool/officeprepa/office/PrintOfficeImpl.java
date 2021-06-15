@@ -9,6 +9,9 @@ import java.util.stream.Collectors;
 
 public class PrintOfficeImpl implements PrintOffice {
 
+    public PrintOfficeImpl () {
+    }
+
     @Override
     public String printEmployees ( Office o ) {
         StringBuilder sb = new StringBuilder();
@@ -17,10 +20,10 @@ public class PrintOfficeImpl implements PrintOffice {
         sb.append("----------------------------\n");
         int employeeCounter = 0;
         for (Employee e : o.getEmployees()){
-            sb.append(++employeeCounter + ". " + e + "\n");
+            sb.append(++employeeCounter).append(". ").append(e).append("\n");
         }
         sb.append("----------------------------\n");
-        sb.append("all emplyees: " + employeeCounter);
+        sb.append("all emplyees: ").append(employeeCounter);
         return sb.toString();
     }
 
