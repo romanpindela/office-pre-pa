@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class PrintSalaryOfficeImpl implements PrintSalaryOffice{
+    public PrintSalaryOfficeImpl () {
+    }
+
     @Override
     public String printYearSalaryOneEmployee ( SalaryCalculator sC, LocalDate date, Employee e ) {
         StringBuilder sb = new StringBuilder();
@@ -34,7 +37,7 @@ public class PrintSalaryOfficeImpl implements PrintSalaryOffice{
         Optional<List<EntrySalary>> maybeYearSalary = sC.getYearSalaryByEmployeesEntries(date);
 
         sb.append("----------------------------\n");
-        sb.append("Year's salary by employee: \n");
+        sb.append("Year's salary by employees: \n");
         sb.append("----------------------------\n");
 
         if (maybeYearSalary.isPresent()){

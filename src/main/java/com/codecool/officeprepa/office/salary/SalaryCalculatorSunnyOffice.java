@@ -18,8 +18,8 @@ public class SalaryCalculatorSunnyOffice extends SalaryCalculator{
 
     private static final BigDecimal BONUS_AMOUNT_FOR_TEAM_MEMBER = BigDecimal.valueOf(200);
 
-    public SalaryCalculatorSunnyOffice ( List<EntrySalary> sCalculator, List<Employee> employees, Map<String, Leader> groups ) {
-        super(sCalculator, employees, groups);
+    public SalaryCalculatorSunnyOffice ( List<EntrySalary> salaryEntries, List<Employee> employees, Map<String, Leader> groups ) {
+        super(salaryEntries, employees, groups);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class SalaryCalculatorSunnyOffice extends SalaryCalculator{
 
                 calculatedSalary =
                         BONUS_AMOUNT_FOR_TEAM_MEMBER.multiply(BigDecimal.valueOf(salaryBonusFactorLeader));
-                calculatedSalary.add(e.getContractSalary());
+                calculatedSalary = calculatedSalary.add(e.getContractSalary());
 
             } else { calculatedSalary = BigDecimal.valueOf(0); }
             calculatedSalaryEntries.add(new EntrySalary(

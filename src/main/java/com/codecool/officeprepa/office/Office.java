@@ -10,10 +10,13 @@ import java.util.Map;
 
 public abstract class Office {
     List<Employee> employees;
+
+
     Map<String, Leader> groups;
     SalaryCalculator salaryCalculator;
 
     String officeName;
+
 
     public Office ( List<Employee> employees,
                     SalaryCalculator salaryCalculator,
@@ -36,6 +39,13 @@ public abstract class Office {
 
     public void removeGroup(String group){
         groups.remove(group);
+    }
+    public Map<String, Leader> getGroups () {
+        return groups;
+    }
+
+    public SalaryCalculator getSalaryCalculator () {
+        return salaryCalculator;
     }
 
     public void fireEmployee( Employee e){
